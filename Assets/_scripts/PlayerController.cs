@@ -14,10 +14,17 @@ public class PlayerController : MonoBehaviour
     public float tilt = 10;
 
     public Boundary boundary;
+
+    //发射子弹 bolt
+    public float fireRate = 0.2f; 
+    public GameObject bolt; 
+    public Transform boltTransform;
+    private float nextFire = 0.0f;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     void FixedUpdate()
@@ -40,6 +47,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //发射子弹
+        if (Input.GetButton("Fire1") && Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            Instantiate(bolt, boltTransform.position, boltTransform.rotation);
+        }
     }
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DestroyOnContact : MonoBehaviour
 {
+    public GameObject exlposion;
+    public GameObject playerExplosion;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,11 @@ public class DestroyOnContact : MonoBehaviour
             return;
         }
 
+        Instantiate(exlposion, transform.position, transform.rotation);
+        if(other.tag == "Player")
+        {
+            Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+        }
         Destroy(other.gameObject);
         Destroy(gameObject);
     }

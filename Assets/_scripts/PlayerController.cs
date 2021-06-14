@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
         {
             nextFire = Time.time + fireRate;
             Instantiate(bolt, boltTransform.position, boltTransform.rotation);
+            GetComponent<AudioSource>().Play();
         }
     }
 }

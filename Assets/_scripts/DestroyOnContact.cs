@@ -7,10 +7,27 @@ public class DestroyOnContact : MonoBehaviour
     public GameObject exlposion;
     public GameObject playerExplosion;
 
+    public int scoreValue;
+    private GameController gameController;//script
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject go = GameObject.FindWithTag("GameController");
+        if(go != null)
+        {
+            gameController = go.GetComponent<GameController>();
+        }
+        else
+        {
+            Debug.Log("找不到tag为GameController的对象");
+        }
+
+        if(gameController==null)
+        {
+            Debug.Log("找不到脚本GameController.cs");
+        }
+
     }
 
     // Update is called once per frame
@@ -27,6 +44,8 @@ public class DestroyOnContact : MonoBehaviour
             return;
         }
 
+        gameController.AddScore(scoreValue);
+
         Instantiate(exlposion, transform.position, transform.rotation);
         if(other.tag == "Player")
         {
@@ -34,5 +53,6 @@ public class DestroyOnContact : MonoBehaviour
         }
         Destroy(other.gameObject);
         Destroy(gameObject);
+
     }
 }

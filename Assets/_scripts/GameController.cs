@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class GameController : MonoBehaviour
     public float waveWait = 2;
     private Vector3 spawnPosition = Vector3.zero;
     private Quaternion spawnRotation;
+
+    public Text scoreText;
+    private int score;
 
     IEnumerator SpawnWaves()
     {
@@ -33,6 +37,9 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        score = 0;
+        UpdateScore();
+
         StartCoroutine(SpawnWaves());
     }
 
@@ -41,4 +48,16 @@ public class GameController : MonoBehaviour
     {
         
     }
+
+    public void AddScore(int newScoreValue)
+    {
+        score += newScoreValue;
+        UpdateScore();
+    }
+
+    void UpdateScore()
+    {
+        scoreText.text = "得分：" + score;
+    }
+
 }
